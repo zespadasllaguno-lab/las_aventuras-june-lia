@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Las aventuras de June y Lía</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+body {
+  margin:0;
+  font-family:'Quicksand', sans-serif;
+  background:linear-gradient(180deg,#1b1b3a,#3a2f6b);
+  color:#fff;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Estrellas de fondo */
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background-image: radial-gradient(#ffffff 1px, transparent 1px);
+  background-size:50px 50px;
+  opacity:0.15;
+  animation:estrellas 60s linear infinite;
+  z-index:-1;
+}
+@keyframes estrellas {from{background-position:0 0;} to{background-position:1000px 1000px;}}
+
+/* Portada flotante interactiva */
+.portada-container {text-align:center; margin:40px 0; position:relative; z-index:1; perspective:1000px;}
+.portada-container img {
+  width:250px; max-width:80%; border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transition: transform 0.1s ease-out;
+}
+
+/* Fondo difuminado de personajes */
+.fondo-personaje {position:relative; overflow:hidden;}
+.fondo-personaje::before {
+  content:"";
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background-size:cover; background-position:center;
+  opacity:0.05; z-index:0;
+}
+.fondo-june::before {background-image:url('june.jpg');}
+.fondo-lia::before {background-image:url('lia.jpg');}
+
+section {max-width:900px; margin:auto; padding:50px 20px; position:relative; z-index:1;}
+.card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  border-radius:25px; padding:40px; margin-bottom:60px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.4); position:relative; z-index:1;
+}
+h2 {text-align:center; color:#ffd6ff; font-size:2em;}
+.frase {text-align:center; font-size:1.5em; font-style:italic; margin:35px 0; color:#ffe5ec;}
+p {font-size:1.1em; line-height:1.7;}
+.btn {display:block; width:fit-content; margin:40px auto 0; padding:16px 38px;
+  background:linear-gradient(45deg,#ff8fab,#b65fcf); color:white; text-decoration:none;
+  border-radius:50px; font-weight:600; font-size:1.2em; box-shadow:0 8px 20px rgba(0,0,0,0.5);
+  transition:transform 0.3s;}
+.btn:hover {transform:scale(1.1);}
+footer {text-align:center; padding:40px 20px; background: rgba(0,0,0,0.3); font-size:0.9em;}
+
+/* Formulario de reseñas */
+.reseñas-form {display:flex; flex-direction:column;}
+.reseñas-form input, .reseñas-form textarea {
+  margin-bottom:15px; padding:10px; border-radius:10px; border:none; font-size:1em;
+}
+.reseñas-form button {
+  padding:12px; font-size:1em; font-weight:600; border-radius:50px; border:none;
+  background: linear-gradient(45deg,#b65fcf,#ff8fab); color:white; cursor:pointer; transition:transform 0.3s;
+}
+.reseñas-form button:hover { transform:scale(1.05); }
+.lista-reseñas { margin-top:30px; }
+.lista-reseñas .resena { background: rgba(255,255,255,0.08); padding:15px; border-radius:15px; margin-bottom:15px; }
+
+/* Contenedor de partículas */
+#particles {position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
+.particle {position:absolute; width:4px; height:4px; background:white; border-radius:50%; opacity:0.8;}
+</style>
+</head>
+
+<body>
+
+<div id="particles"></div>
+
+<header>
+  <h1>✨ Las aventuras de June y Lía ✨</h1>
+  <p>Algunos jardines no aparecen en los mapas.<br>Solo los encuentran quienes miran con el corazón.</p>
+  <p><strong>Zuriñe Espadas Llaguno</strong></p>
+</header>
+
+<!-- 🎵 Reproductor mágico de la canción -->
+<div style="text-align:center; margin:20px 0;">
+  <p style="font-size:1.2em; color:#ffe5ec; margin-bottom:10px;">
+    🎶 Escucha la canción de <em>June y Lía</em>
+  </p>
+  <audio controls style="width:90%; max-width:600px;">
+    <source src="https://suno.com/song/7ee5700c-8128-4375-b641-3027f9f9b60b?sh=DIMz7BsQyZaxcAa5" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+</div>
+
+<div class="portada-container">
+  <img id="portada" src="portada.jpg" alt="Portada de Las aventuras de June y Lía">
+</div>
+
+<section class="fondo-june">
+
+  <div class="card">
+    <h2>🌲 El jardín de los mapas secretos</h2>
+    <p class="frase">“La magia existe… si sabes dónde mirar.”</p>
+    <p>June y Lía son mellizas, diferentes pero unidas por la valentía y la imaginación. Sus veranos transcurren en un jardín donde las flores susurran secretos y los árboles guardan historias.</p>
+  </div>
+
+  <div class="card fondo-lia">
+    <h2>🧭 El Bosque de los Sueños</h2>
+    <p class="frase">“Cada paso que das es un descubrimiento.”</p>
+    <p>Con un mapa dorado en mano, las mellizas se adentran en un bosque donde nada es lo que parece, caminos secretos esperan y criaturas misteriosas guían su camino hacia la Montaña de la Valentía.</p>
+  </div>
+
+  <div class="card">
+    <h2>😂 El Túnel de las Bromas</h2>
+    <p class="frase">“Reír juntas también es un acto de valentía.”</p>
+    <p>En el túnel de las risas, June y Lía descubrirán que la magia más poderosa está en compartir alegría, enfrentarse al ridículo y reírse de sí mismas junto a criaturas increíbles.</p>
+  </div>
+
+  <div class="card">
+    <h2>💫 La magia de este libro</h2>
+    <p class="frase">“La magia que se comparte no se pierde. Se multiplica.”</p>
+    <p>Cada página invita a imaginar, soñar y sentir que todo es posible. Un libro para leer despacio, compartir y recordar.</p>
+  </div>
+
+  <div class="card">
+    <h2>📖 ¿Te atreves a entrar?</h2>
+    <p class="frase">“Abre el libro. El bosque te espera.”</p>
+    <a class="btn" href="https://www.diversidadliteraria.com/autores/zurine-espadas-llaguno" target="_blank">Comprar en Diversidad Literaria</a>
+  </div>
+
+  <div class="card">
+    <h2>✍️ La autora</h2>
+    <p>Zuriñe Espadas Llaguno escribe historias para sembrar magia, alegría y confianza. Cree que los cuentos no solo se leen: se viven y acompañan a quienes los descubren.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌟 Reseñas de lectores</h2>
+    <form class="reseñas-form" id="formReseñas">
+      <input type="text" id="nombre" placeholder="Tu nombre" required>
+      <textarea id="comentario" placeholder="Escribe tu reseña aquí" rows="4" required></textarea>
+      <button type="submit">Enviar reseña</button>
+    </form>
+    <div class="lista-reseñas" id="listaReseñas"></div>
+  </div>
+
+</section>
+
+<footer>
+  ✨ Gracias por creer en la magia ✨<br>
+  © Las aventuras de June y Lía
+</footer>
+
+<!-- Sonido ambiental de campanillas -->
+<audio id="campanillas" loop>
+  <source src="campanillas.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio HTML5.
+</audio>
+
+<script>
+// Reseñas
+document.getElementById('formReseñas').addEventListener('submit', function(e){
+  e.preventDefault();
+  const nombre = document.getElementById('nombre').value;
+  const comentario = document.getElementById('comentario').value;
+  const lista = document.getElementById('listaReseñas');
+  const div = document.createElement('div');
+  div.className = 'resena';
+  div.innerHTML = `<strong>${nombre}</strong>: <p>${comentario}</p>`;
+  lista.prepend(div);
+  this.reset();
+});
+
+// Partículas mágicas
+const particlesContainer = document.getElementById('particles');
+const totalParticles = 60;
+const particles = [];
+for(let i=0;i<totalParticles;i++){
+  const p=document.createElement('div'); p.className='particle';
+  p.style.left=Math.random()*window.innerWidth+'px';
+  p.style.top=Math.random()*window.innerHeight+'px';
+  p.style.width=p.style.height=2+Math.random()*3+'px';
+  particlesContainer.appendChild(p);
+  particles.push({el:p, x:parseFloat(p.style.left), y:parseFloat(p.style.top), dx:(Math.random()-0.5)/2, dy:(Math.random()-0.5)/2});
+}
+
+let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
+document.addEventListener('mousemove', e => {mouseX=e.clientX; mouseY=e.clientY;});
+
+function animateParticles(){
+  particles.forEach(pt=>{
+    pt.x += pt.dx; pt.y += pt.dy;
+    const distX = (mouseX - pt.x)/100;
+    const distY = (mouseY - pt.y)/100;
+    pt.x += distX; pt.y += distY;
+    if(pt.x<0||pt.x>window.innerWidth) pt.dx*=-1;
+    if(pt.y<0||pt.y>window.innerHeight) pt.dy*=-1;
+    pt.el.style.left=pt.x+'px';
+    pt.el.style.top=pt.y+'px';
+  });
+  const portada = document.getElementById('portada');
+  const rotateY = (mouseX - window.innerWidth/2)/30;
+  const rotateX = -(mouseY - window.innerHeight/2)/30;
+  portada.style.transform=`rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateY(-15px)`;
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Sonido ambiental de campanillas
+const campanillas = document.getElementById('campanillas');
+campanillas.volume = 0.05;
+campanillas.play().catch(()=>{});
+let lastMove = Date.now();
+document.addEventListener('mousemove', e => {
+  let now = Date.now();
+  if(now - lastMove > 100){
+    campanillas.volume = 0.08;
+    setTimeout(()=>{campanillas.volume=0.05}, 200);
+    lastMove = now;
+  }
+});
+</script>
+
+</body>
+</html>
