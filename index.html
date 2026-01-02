@@ -1,0 +1,67 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Las Aventuras de June y Lía</title> <style> /* Reset básico */ * { margin:0; padding:0; box-sizing:border-box; }
+
+ body { font-family: 'Comic Sans MS', cursive, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #ffe6f0); color: #333; line-height: 1.6; overflow-x: hidden; padding: 20px; }
+
+ header { text-align: center; padding: 40px 20px; }
+
+ header h1 { font-size: 3em; color: #d94fff; text-shadow: 2px 2px #fff; }
+
+ /* Portada del libro */ .portada { display: block; margin: 0 auto 30px auto; max-width: 300px; border-radius: 15px; box-shadow: 0 0 20px #ffccf0; transition: transform 0.3s ease; }
+
+ .portada:hover { transform: scale(1.05); }
+
+ /* Música Suno AI */ .musica { text-align: center; margin: 20px 0; }
+
+ iframe { width: 100%; max-width: 400px; height: 80px; border: none; }
+
+ /* Secciones de contenido */ section { max-width: 900px; margin: 20px auto; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 15px; box-shadow: 0 0 15px #ffccf0; }
+
+ h2 { color: #ff69b4; margin-bottom: 10px; }
+
+ p { font-size: 1.1em; margin-bottom: 15px; }
+
+ /* Botón de compra */ .boton-compra { display: inline-block; background: #ff69b4; color: #fff; padding: 15px 25px; border-radius: 10px; font-weight: bold; text-decoration: none; transition: 0.3s; margin-top: 10px; }
+
+ .boton-compra:hover { background: #d94fff; }
+
+ /* Reseñas */ .reseñas textarea { width: 100%; height: 80px; margin-bottom: 10px; border-radius: 10px; border: 2px solid #ff69b4; padding: 10px; resize: none; font-family: 'Comic Sans MS', cursive, sans-serif; }
+
+ .reseñas button { background: #ff69b4; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
+ .lista-reseñas div { background: #ffccf0; padding: 10px; border-radius: 10px; margin-bottom: 10px; }
+
+ /* Frases mágicas flotantes */ .frase-magica { position: fixed; font-size: 1.2em; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px #fff; animation: floatMagic 8s linear infinite; pointer-events: none; opacity: 0; }
+
+ @keyframes floatMagic { 0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; } }
+
+ @media (max-width: 600px) { header h1 { font-size: 2em; } .boton-compra { padding: 10px 20px; font-size: 0.9em; } .frase-magica { font-size: 1em; } } </style> </head> <body>
+
+<header> <h1>Las Aventuras de June y Lía</h1> </header>
+
+<!-- Portada --> <img class="portada" src="portada.jpg" alt="Portada del libro">
+
+<!-- Música --> <div class="musica"> <iframe src="https://suno.com/song/7ee5700c-8128-4375-b641-3027f9f9b60b/embed" allow="autoplay"></iframe> </div>
+
+<!-- Frases mágicas flotantes --> <div id="frases-container"></div>
+
+<!-- Sinopsis o extractos --> <section> <h2>Sumérgete en la aventura</h2> <p>June y Lía descubren mundos mágicos, túneles que ríen y molinos que despiertan con la chispa de su imaginación.</p> <p>Cada paso es una promesa, cada risa un hechizo, y cada descubrimiento un tesoro para el corazón.</p> </section>
+
+<!-- Sección de compra --> <section class="compra"> <h2>Compra el libro</h2> <a class="boton-compra" href="https://www.diversidadliteraria.com/autores-s-z/zuri%C3%B1e%20espadas%20llaguno" target="_blank">Comprar en Diversidad Literaria</a> </section>
+
+<!-- Sección reseñas --> <section class="reseñas"> <h2>Deja tu reseña</h2> <textarea id="input-reseña" placeholder="Escribe aquí tu reseña..."></textarea> <button id="btn-reseña">Añadir reseña</button> <div class="lista-reseñas" id="lista-reseñas"></div> </section>
+
+<script> // Todas las frases mágicas de capítulos 1,5,8 const frases = [ "El jardín es mágico… si solo lo crees.", "Flores que susurran secretos al pasar.", "Un roble nacido de una estrella caída del cielo.", "Gotas brillando como cristales mágicos en las hojas.", "Todo es posible si das el primer paso.", "La caja antigua estaba esperando a ser descubierta.", "Camina con el corazón abierto y verás la magia.", "La bola de cristal Imaginarium muestra lo que necesitas imaginar.", "Ríe, y las paredes del túnel reirán contigo.", "El Charco de Jabón Gigante convierte cada caída en diversión.", "Los Travesuelos riman dormidos y despiertos, ¡y tú también puedes!", "Reír de ti misma es romper el nudo de la magia.", "Cada broma es un hechizo de alegría.", "Compartir la risa también es magia.", "Cada pétalo de cristal guarda una llave del alma.", "Hay magia dentro de vosotras… la que crea sueños y repara corazones.", "Sois las Hadas de los Sueños, lleváis la esperanza en la sangre.", "Ver lo invisible… sentir lo que otros guardan en su corazón.", "Cread algo solo con lo que lleváis dentro.", "Una luz cálida y vibrante brotó de vuestros corazones.", "El Molino despierta con cada chispa de imaginación.", "No hace falta varita para hacer magia… basta con escuchar y confiar.", "La magia más poderosa no cambia las cosas, cambia a quien la posee.", "Los sueños siempre encuentran el camino de vuelta." ];
+
+ const frasesContainer = document.getElementById('frases-container');
+
+ function crearFrase() { const frase = document.createElement('div'); frase.classList.add('frase-magica'); frase.textContent = frases[Math.floor(Math.random()*frases.length)]; frase.style.left = Math.random()*80 + "vw"; frase.style.fontSize = (14 + Math.random()*14) + "px"; frase.style.animationDuration = (5 + Math.random()*5) + "s"; frasesContainer.appendChild(frase); setTimeout(() => frase.remove(), 10000); }
+
+ setInterval(crearFrase, 1200);
+
+ // Reseñas con localStorage const btnReseña = document.getElementById('btn-reseña'); const inputReseña = document.getElementById('input-reseña'); const listaReseñas = document.getElementById('lista-reseñas');
+
+ btnReseña.addEventListener('click', () => { const texto = inputReseña.value.trim(); if(texto!==''){ const div = document.createElement('div'); div.textContent = texto; listaReseñas.appendChild(div); let reseñas = JSON.parse(localStorage.getItem('reseñas') || '[]'); reseñas.push(texto); localStorage.setItem('reseñas', JSON.stringify(reseñas)); inputReseña.value=''; } });
+
+ window.addEventListener('load', () => { let reseñas = JSON.parse(localStorage.getItem('reseñas') || '[]'); reseñas.forEach(texto => { const div = document.createElement('div'); div.textContent = texto; listaReseñas.appendChild(div); }); }); </script>
+
+</body> </html>
