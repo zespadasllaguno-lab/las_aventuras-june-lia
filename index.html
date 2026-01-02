@@ -1,0 +1,57 @@
+Enviado <!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Las Aventuras de June y Lía</title> <style> * { margin:0; padding:0; box-sizing:border-box; } body { font-family: 'Comic Sans MS', cursive, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #ffe6f0); color: #333; line-height: 1.6; overflow-x: hidden; padding: 20px; position: relative; }
+
+/* Header */ header { text-align:center; padding:40px 20px; z-index: 2; position: relative;} header h1 { font-size: 3em; color: #d94fff; text-shadow: 2px 2px #fff; }
+
+/* Portada con destellos */ .portada { display: block; margin: 0 auto 30px auto; max-width: 300px; border-radius: 15px; box-shadow: 0 0 20px #ffccf0; transition: transform 0.5s ease, box-shadow 0.5s ease; position: relative; } .portada:hover { transform: scale(1.05); box-shadow: 0 0 50px #ff99ff, 0 0 100px #ffccff; }
+
+/* Botón y reproductor de música */ .musica { text-align:center; margin:20px 0; z-index:2; position: relative; } .musica button { background:#ff69b4; color:#fff; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer; } .musica audio { margin-top:10px; width:300px; border-radius:10px; }
+
+/* Secciones */ section { max-width: 900px; margin: 20px auto; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 15px; box-shadow: 0 0 15px #ffccf0; z-index:2; position: relative; } h2 { color: #ff69b4; margin-bottom: 10px; } p { font-size: 1.1em; margin-bottom: 15px; }
+
+/* Botón compra */ .boton-compra { display: inline-block; background: #ff69b4; color: #fff; padding: 15px 25px; border-radius: 10px; font-weight: bold; text-decoration: none; transition: 0.3s; margin-top: 10px; } .boton-compra:hover { background: #d94fff; }
+
+/* Reseñas */ .reseñas textarea { width: 100%; height: 80px; margin-bottom: 10px; border-radius: 10px; border: 2px solid #ff69b4; padding: 10px; resize: none; font-family: 'Comic Sans MS', cursive, sans-serif; } .reseñas button { background: #ff69b4; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; } .lista-reseñas div { background: #ffccf0; padding: 10px; border-radius: 10px; margin-bottom: 10px; }
+
+/* Frases mágicas flotantes */ .frase-magica { position: fixed; font-size: 1.2em; font-weight: bold; text-shadow: 1px 1px #fff; animation: floatMagic linear infinite, colorChange 4s infinite alternate; pointer-events: none; opacity: 1; z-index: 999; } @keyframes floatMagic { 0% { transform: translateY(100vh) translateX(0) rotate(0deg);} 100% { transform: translateY(-10vh) translateX(50px) rotate(360deg);} } @keyframes colorChange { 0% { color: #ff69b4; } 25% { color: #ffccff; } 50% { color: #ff99ff; } 75% { color: #ffb3ff; } 100% { color: #ff69b4; } }
+
+/* Partículas mágicas coloridas */ .particulas { position: fixed; top:0; left:0; width: 100%; height: 100%; pointer-events: none; z-index:0; } .particula { position: absolute; border-radius: 50%; opacity: 0.7; animation: subir linear infinite; } @keyframes subir { 0% { transform: translateY(100vh) translateX(0) rotate(0deg);} 100% { transform: translateY(-10vh) translateX(50px) rotate(360deg);} }
+
+@media (max-width: 600px) { header h1 { font-size: 2em; } .boton-compra { padding: 10px 20px; font-size: 0.9em; } .frase-magica { font-size: 1em; } } </style> </head> <body>
+
+<header> <h1>Las Aventuras de June y Lía</h1> </header>
+
+<!-- Portada --> <img class="portada" src="portada.jpg" alt="Portada del libro">
+
+<!-- Música con botón --> <div class="musica"> <button id="btn-musica">🎵 Reproducir música</button> <audio id="audio-musica" src="https://s3.eu-central-1.amazonaws.com/suno-public/songs/7ee5700c-8128-4375-b641-3027f9f9b60b.mp3" preload="auto"></audio> </div>
+
+<!-- Contenedor de frases mágicas --> <div id="frases-container"></div>
+
+<!-- Secciones --> <section> <h2>Sumérgete en la aventura</h2> <p>June y Lía descubren mundos mágicos, túneles que ríen y molinos que despiertan con la chispa de su imaginación.</p> <p>Cada paso es una promesa, cada risa un hechizo, y cada descubrimiento un tesoro para el corazón.</p> </section>
+
+<section class="compra"> <h2>Compra el libro</h2> <a class="boton-compra" href="https://www.diversidadliteraria.com/autores-s-z/zuri%C3%B1e%20espadas%20llaguno" target="_blank">Comprar en Diversidad Literaria</a> </section>
+
+<section class="reseñas"> <h2>Deja tu reseña</h2> <textarea id="input-reseña" placeholder="Escribe aquí tu reseña..."></textarea> <button id="btn-reseña">Añadir reseña</button> <div class="lista-reseñas" id="lista-reseñas"></div> </section>
+
+<!-- Partículas mágicas --> <div class="particulas"></div>
+
+<!-- Sonido de frase mágica --> <audio id="audio-frase" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3" preload="auto"></audio>
+
+<script> // Frases mágicas const frases = [ "El jardín es mágico… si solo lo crees.", "Flores que susurran secretos al pasar.", "Un roble nacido de una estrella caída del cielo.", "Gotas brillando como cristales mágicos en las hojas.", "Todo es posible si das el primer paso.", "La caja antigua estaba esperando a ser descubierta.", "Camina con el corazón abierto y verás la magia.", "La bola de cristal Imaginarium muestra lo que necesitas imaginar.", "Ríe, y las paredes del túnel reirán contigo.", "El Charco de Jabón Gigante convierte cada caída en diversión.", "Los Travesuelos riman dormidos y despiertos, ¡y tú también puedes!", "Reír de ti misma es romper el nudo de la magia.", "Cada broma es un hechizo de alegría.", "Compartir la risa también es magia.", "Cada pétalo de cristal guarda una llave del alma.", "Hay magia dentro de vosotras… la que crea sueños y repara corazones.", "Sois las Hadas de los Sueños, lleváis la esperanza en la sangre.", "Ver lo invisible… sentir lo que otros guardan en su corazón.", "Cread algo solo con lo que lleváis dentro.", "Una luz cálida y vibrante brotó de vuestros corazones.", "El Molino despierta con cada chispa de imaginación.", "No hace falta varita para hacer magia… basta con escuchar y confiar.", "La magia más poderosa no cambia las cosas, cambia a quien la posee.", "Los sueños siempre encuentran el camino de vuelta." ]; const frasesContainer = document.getElementById('frases-container'); const audioFrase = document.getElementById('audio-frase');
+
+function crearFrase() { const frase = document.createElement('div'); frase.classList.add('frase-magica'); frase.textContent = frases[Math.floor(Math.random()*frases.length)]; frase.style.left = Math.random()*80 + "vw"; frase.style.fontSize = (14 + Math.random()*14) + "px"; frase.style.animationDuration = (5 + Math.random()*5) + "s"; frasesContainer.appendChild(frase);
+
+ // Sonido de frase audioFrase.currentTime = 0; audioFrase.play().catch(()=>{});
+
+ setTimeout(()=>frase.remove(), 10000); } setInterval(crearFrase, 1200);
+
+// Partículas mágicas coloridas const particulas = document.querySelector('.particulas'); for(let i=0;i<100;i++){ let p = document.createElement('div'); p.classList.add('particula'); p.style.left = Math.random()*100 + 'vw'; p.style.width = 3 + Math.random()*10 + 'px'; p.style.height = p.style.width; const colores = ["#ff69b4","#ff99ff","#ffc0cb","#ffccff","#ffb3ff"]; p.style.background = colores[Math.floor(Math.random()*colores.length)]; p.style.animationDuration = 3 + Math.random()*5 + 's'; particulas.appendChild(p); }
+
+// Botón música const btnMusica = document.getElementById('btn-musica'); const audioMusica = document.getElementById('audio-musica'); btnMusica.addEventListener('click', ()=>{ audioMusica.play(); btnMusica.style.display='none'; });
+
+// Reseñas const btnReseña=document.getElementById('btn-reseña'); const inputReseña=document.getElementById('input-reseña'); const listaReseñas=document.getElementById('lista-reseñas');
+
+btnReseña.addEventListener('click',()=>{ const texto=inputReseña.value.trim(); if(texto!==''){ const div=document.createElement('div'); div.textContent=texto; listaReseñas.appendChild(div); let reseñas=JSON.parse(localStorage.getItem('reseñas')||'[]'); reseñas.push(texto); localStorage.setItem('reseñas',JSON.stringify(reseñas)); inputReseña.value=''; } });
+
+window.addEventListener('load',()=>{ let reseñas=JSON.parse(localStorage.getItem('reseñas')||'[]'); reseñas.forEach(texto=>{ const div=document.createElement('div'); div.textContent=texto; listaReseñas.appendChild(div); }); }); </script>
+
+</body>
