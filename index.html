@@ -1,0 +1,47 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Las aventuras de June y Lía</title> <style> body, html { margin: 0; padding: 0; font-family: 'Comic Sans MS', cursive, sans-serif; background: #f0f8ff; overflow-x: hidden; color: #333; }
+
+ header { text-align:center; padding:30px 20px; } h1 { font-size:2.5em; color:#d94fff; text-shadow:2px 2px #fff; }
+
+ section { padding:20px; max-width:900px; margin:auto; background: rgba(255,255,255,0.9); margin-bottom:30px; border-radius:15px; box-shadow:0 0 15px #ffccf0; }
+
+ .capitulo h2 { color:#ff69b4; font-size:1.8em; margin-bottom:10px; } .capitulo p { line-height:1.6em; font-size:1.1em; }
+
+ .boton-compra { display:inline-block; background:#ff69b4; color:white; padding:15px 25px; text-decoration:none; font-weight:bold; border-radius:10px; margin-top:15px; transition:0.3s; } .boton-compra:hover { background:#d94fff; }
+
+ .reseñas textarea { width:100%; height:80px; margin-bottom:10px; font-family: 'Comic Sans MS', cursive, sans-serif; border-radius:10px; border:2px solid #ff69b4; padding:10px; resize:none; } .reseñas button { background:#ff69b4; color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer; } .reseñas .lista-reseñas { margin-top:15px; }
+
+ /* Botón de música Suno AI */ #btn-suno { position: fixed; top:20px; right:20px; background:#ff69b4; color:white; border:none; padding:10px 15px; border-radius:10px; cursor:pointer; font-weight:bold; z-index:10; }
+
+ /* Partículas mágicas */ .particulas { position: fixed; top:0; left:0; width: 100%; height: 100%; pointer-events: none; z-index:0; } .particula { position: absolute; width: 8px; height: 8px; background: #ff69b4; border-radius: 50%; opacity: 0.8; animation: subir 5s linear infinite; } @keyframes subir { 0% { transform: translateY(100vh) translateX(0) rotate(0deg);} 100% { transform: translateY(-10vh) translateX(50px) rotate(360deg);} } </style> </head> <body>
+
+<div class="particulas"></div>
+
+<header> <h1>Las aventuras de June y Lía</h1> </header>
+
+<!-- Botón para mostrar/ocultar la música AI --> <button id="btn-suno">🎵 Música AI</button>
+
+<!-- Sección música Suno AI (oculta por defecto) --> <section id="suno-container" class="musica-suno" style="text-align:center; margin:30px 0; display:none;"> <h2>Música de Suno AI 🎶</h2> <iframe src="https://suno.com/song/7ee5700c-8128-4375-b641-3027f9f9b60b/embed" width="300" height="80" frameborder="0" allow="autoplay"> </iframe> </section>
+
+<!-- Capítulos --> <section class="capitulo"> <h2>El jardín de los mapas secretos</h2> <p>June y Lía eran mellizas con caracteres muy distintos. Los ojos avellana de June eran grandes, expresivos y siempre llenos de ideas; constantemente imaginaba locos inventos que podía construir con cualquier cosa que encontrara...</p> </section>
+
+<section class="capitulo"> <h2>El mapa del Bosque de los Sueños</h2> <p>Una tarde de verano, después de una leve lluvia que dejó las hojas cubiertas de gotas relucientes como cristales mágicos, las mellizas salieron con sus botas de charol y sus impermeables multicolores...</p> </section>
+
+<section class="capitulo"> <h2>El Túnel de las Bromas y la Bola de Cristal Imaginarium</h2> <p>Cuando el eco de las últimas risas se desvaneció en la Biblioteca del Silencio, Punto y Coma se acercaron a las mellizas con ojos chispeantes...</p> </section>
+
+<!-- Sección compra --> <section class="compra"> <h2>Compra el libro</h2> <a class="boton-compra" href="https://www.diversidadliteraria.com/autores-s-z/zuri%C3%B1e%20espadas%20llaguno" target="_blank">Comprar en Diversidad Literaria</a> </section>
+
+<!-- Sección reseñas --> <section class="reseñas"> <h2>Deja tu reseña</h2> <textarea id="input-reseña" placeholder="Escribe aquí tu reseña..."></textarea> <button id="btn-reseña">Añadir reseña</button> <div class="lista-reseñas" id="lista-reseñas"></div> </section>
+
+<script> // Toggle música AI const btnSuno = document.getElementById('btn-suno'); const sunoContainer = document.getElementById('suno-container'); btnSuno.addEventListener('click', () => { if(sunoContainer.style.display === 'none') { sunoContainer.style.display = 'block'; } else { sunoContainer.style.display = 'none'; } });
+
+ // Partículas mágicas const particulas = document.querySelector('.particulas'); for(let i=0; i<80; i++){ let p = document.createElement('div'); p.classList.add('particula'); p.style.left = Math.random() * 100 + 'vw'; p.style.animationDuration = 3 + Math.random() * 5 + 's'; p.style.width = 5 + Math.random()*12 + 'px'; p.style.height = p.style.width; particulas.appendChild(p); }
+
+ // Reseñas con localStorage const btnReseña = document.getElementById('btn-reseña'); const inputReseña = document.getElementById('input-reseña'); const listaReseñas = document.getElementById('lista-reseñas');
+
+ btnReseña.addEventListener('click', () => { const texto = inputReseña.value.trim(); if(texto!==''){ const div = document.createElement('div'); div.textContent = texto; div.style.background = '#ffccf0'; div.style.padding = '10px'; div.style.borderRadius = '10px'; div.style.marginBottom = '10px'; listaReseñas.appendChild(div);
+
+ let reseñas = JSON.parse(localStorage.getItem('reseñas') || '[]'); reseñas.push(texto); localStorage.setItem('reseñas', JSON.stringify(reseñas)); inputReseña.value=''; } });
+
+ window.addEventListener('load', () => { let reseñas = JSON.parse(localStorage.getItem('reseñas') || '[]'); reseñas.forEach(texto => { const div = document.createElement('div'); div.textContent = texto; div.style.background = '#ffccf0'; div.style.padding = '10px'; div.style.borderRadius = '10px'; div.style.marginBottom = '10px'; listaReseñas.appendChild(div); }); }); </script>
+
+</body> </html>
