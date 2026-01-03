@@ -1,0 +1,51 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Las Aventuras de June y Lía</title>
+
+ <style> * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body { font-family: "Comic Sans MS", cursive, sans-serif; background: linear-gradient(to bottom, #ffe6f0, #fff); overflow-x: hidden; }
+
+ header { text-align: center; padding: 40px 20px; position: relative; z-index: 2; }
+
+ header h1 { font-size: 2.8em; color: #d94fff; text-shadow: 2px 2px #fff; }
+
+ .portada { display: block; margin: 30px auto; max-width: 320px; border-radius: 18px; box-shadow: 0 0 25px rgba(255, 182, 193, 0.8); }
+
+ section { max-width: 900px; margin: 30px auto; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 18px; box-shadow: 0 0 15px rgba(255, 182, 193, 0.6); position: relative; z-index: 2; }
+
+ h2 { color: #ff69b4; margin-bottom: 15px; }
+
+ p { font-size: 1.15em; line-height: 1.6; margin-bottom: 15px; }
+
+ /* FRASES FLOTANTES */ #frases-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+
+ .frase-magica { position: absolute; color: #ff69b4; font-size: 1.1em; font-style: italic; opacity: 0.85; animation: flotar 14s linear forwards; white-space: nowrap; }
+
+ @keyframes flotar { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; } }
+
+ /* PARTÍCULAS */ .particulas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+ .particula { position: absolute; width: 10px; height: 10px; background: rgba(255, 182, 193, 0.7); border-radius: 50%; animation: subir 12s linear infinite; }
+
+ @keyframes subir { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } } </style> </head>
+
+<body>
+
+ <header> <h1>Las Aventuras de June y Lía</h1> </header>
+
+ <img class="portada" src="portada.jpg" alt="Portada del libro">
+
+ <section> <h2>Sumérgete en la aventura</h2> <p> June y Lía descubren mundos mágicos, túneles que ríen y molinos que despiertan con la chispa de su imaginación. </p> <p> Cada paso es una promesa, cada risa un hechizo, y cada descubrimiento un tesoro para el corazón. </p> </section>
+
+ <div id="frases-container"></div> <div class="particulas"></div>
+
+ <script> /* FRASES */ const frases = [ "El jardín es mágico… si solo lo crees.", "Flores que susurran secretos al pasar.", "Todo es posible si das el primer paso.", "La imaginación abre puertas invisibles.", "Los sueños también saben el camino." ];
+
+ setInterval(() => { const f = document.createElement("div"); f.className = "frase-magica"; f.textContent = frases[Math.floor(Math.random() * frases.length)]; f.style.left = Math.random() * 90 + "vw"; document.getElementById("frases-container").appendChild(f);
+
+ setTimeout(() => f.remove(), 14000); }, 2500);
+
+ /* PARTÍCULAS */ const contenedor = document.querySelector(".particulas");
+
+ for (let i = 0; i < 40; i++) { const p = document.createElement("div"); p.className = "particula"; p.style.left = Math.random() * 100 + "vw"; p.style.animationDelay = Math.random() * 12 + "s"; p.style.animationDuration = 8 + Math.random() * 8 + "s"; contenedor.appendChild(p); } </script>
+
+</body> </html>
