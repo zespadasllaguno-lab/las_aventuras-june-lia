@@ -46,9 +46,9 @@ h2 { color: #ff69b4; margin-bottom: 10px; } p { font-size: 1.1em; margin-bottom:
 
 setInterval(()=>{ const f = document.createElement('div'); f.className = 'frase-magica'; f.textContent = frases[Math.floor(Math.random()*frases.length)]; f.style.left = Math.random()*80 + "vw"; f.style.animationDuration = (5 + Math.random()*5) + "s"; frasesContainer.appendChild(f); setTimeout(()=>f.remove(),10000); },1200);
 
-/* BOTÓN MÚSICA */ const btnMusic = document.getElementById('btn-music'); const audio = document.getElementById('musica');
-
+/* BOTÓN MÚSICA */ const btnMusic = document.getElementById('btn-music'); const audio = document.getElementById('musica-magica');
 btnMusic.addEventListener('click', () => { if (audio.paused) { audio.play(); btnMusic.textContent = "⏸ Pausar Música"; } else { audio.pause(); btnMusic.textContent = "▶ Escuchar Música Mágica"; } }); </script>
 
 
 </body> </html>
+
