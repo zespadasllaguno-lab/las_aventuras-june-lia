@@ -1,0 +1,49 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Las Aventuras de June y Lía</title>
+
+<style> *{margin:0;padding:0;box-sizing:border-box;}
+
+body{ font-family:"Comic Sans MS","Trebuchet MS",cursive; background:radial-gradient(circle at top,#fff0f7,#ffe6f0); overflow-x:hidden; color:#444; }
+
+/* CABECERA */ header{ text-align:center; padding:50px 20px 30px; position:relative; z-index:3; } header h1{ font-size:2.8em; color:#d94fff; text-shadow:2px 2px #fff; }
+
+/* PORTADA */ .portada{ display:block; margin:30px auto; max-width:320px; border-radius:22px; box-shadow:0 0 30px rgba(255,182,193,.9); position:relative; z-index:3; }
+
+/* DRAGÓN FLOTANTE */ .dragon{ position:fixed; right:-30px; top:28%; width:260px; animation:flotarDragon 8s ease-in-out infinite; z-index:2; opacity:.95; pointer-events:none; } @keyframes flotarDragon{ 0%{transform:translateY(0) rotate(-2deg);} 50%{transform:translateY(-35px) rotate(2deg);} 100%{transform:translateY(0) rotate(-2deg);} }
+
+/* SECCIONES */ section{ max-width:900px; margin:40px auto; background:rgba(255,255,255,.95); padding:30px; border-radius:22px; box-shadow:0 0 20px rgba(255,182,193,.5); position:relative; z-index:3; } section h2{ text-align:center; color:#ff69b4; margin-bottom:20px; } section p{ font-size:1.15em; line-height:1.7; text-align:center; margin-bottom:20px; }
+
+/* BOTONES */ .boton{ display:inline-block; background:linear-gradient(135deg,#ff69b4,#d94fff); color:#fff; padding:16px 34px; border-radius:30px; font-weight:bold; text-decoration:none; box-shadow:0 0 15px rgba(255,105,180,.7); margin:10px; }
+
+/* RESEÑAS */ .resenas input, .resenas textarea{ width:100%; border-radius:14px; border:2px solid #ff69b4; padding:12px; margin-bottom:12px; } .resenas button{ background:#ff69b4; color:#fff; border:none; padding:12px 30px; border-radius:20px; font-weight:bold; cursor:pointer; } .resena-item{ background:#fff0f7; padding:15px; border-radius:15px; margin-top:15px; }
+
+/* FRASES FLOTANTES */ #frases-container{ position:fixed; inset:0; pointer-events:none; z-index:1; } .frase-magica{ position:absolute; color:#ff69b4; font-style:italic; animation:flotar 16s linear forwards; opacity:0; } @keyframes flotar{ 0%{transform:translateY(100vh);opacity:0;} 10%{opacity:1;} 100%{transform:translateY(-20vh) rotate(360deg);opacity:0;} }
+
+/* PARTÍCULAS */ .particulas{ position:fixed; inset:0; pointer-events:none; z-index:0; } .particula{ position:absolute; width:10px; height:10px; background:rgba(255,182,193,.7); border-radius:50%; animation:subir 14s linear infinite; } @keyframes subir{ from{transform:translateY(100vh);opacity:1;} to{transform:translateY(-10vh);opacity:0;} } </style> </head>
+
+<body>
+
+<header> <h1>Las Aventuras de June y Lía</h1> </header>
+
+<img src="portada.jpg" alt="Portada del libro" class="portada">
+
+<img src="dragon.png" alt="Dragón mágico" class="dragon">
+
+<!-- ENLACE A LA MÚSICA (FUNCIONA SIEMPRE) --> <div style="text-align:center; margin:30px;"> <a href="juneylia.mp3" target="_blank" class="boton"> 🎵 Escuchar la música de June y Lía </a> </div>
+
+<section> <h2>Sumérgete en la aventura</h2> <p> June y Lía descubren mundos mágicos, túneles que ríen y molinos que despiertan con la chispa de su imaginación. </p> <p> Cada paso es una promesa, cada risa un hechizo, y cada descubrimiento un tesoro para el corazón. </p> </section>
+
+<section> <h2>Compra el libro</h2> <div style="text-align:center;"> <a class="boton" href="https://www.diversidadliteraria.com/autores-s-z/zuri%C3%B1e%20espadas%20llaguno" target="_blank"> Comprar diversidad literaria </a> </div> </section>
+
+<section class="resenas"> <h2>Reseñas</h2> <input id="nombre" placeholder="Tu nombre"> <textarea id="textoResena" placeholder="Escribe tu reseña..."></textarea> <button onclick="guardarResena()">Enviar reseña</button> <div id="lista-resenas"></div> </section>
+
+<div id="frases-container"></div> <div class="particulas"></div>
+
+<script> const frases=[ "Todo es posible si das el primer paso.", "Flores que susurran secretos al pasar.", "La magia empieza cuando crees." ];
+
+setInterval(()=>{ const f=document.createElement("div"); f.className="frase-magica"; f.textContent=frases[Math.floor(Math.random()*frases.length)]; f.style.left=Math.random()*90+"vw"; document.getElementById("frases-container").appendChild(f); setTimeout(()=>f.remove(),16000); },3000);
+
+const cont=document.querySelector(".particulas"); for(let i=0;i<40;i++){ const p=document.createElement("div"); p.className="particula"; p.style.left=Math.random()*100+"vw"; p.style.animationDelay=Math.random()*10+"s"; cont.appendChild(p); }
+
+function guardarResena(){ const n=nombre.value.trim(),t=textoResena.value.trim(); if(!n||!t)return alert("Escribe tu nombre y tu reseña 💖"); const r=JSON.parse(localStorage.getItem("resenas"))||[]; r.push({n,t}); localStorage.setItem("resenas",JSON.stringify(r)); nombre.value="";textoResena.value=""; mostrarResenas(); } function mostrarResenas(){ const lista=document.getElementById("lista-resenas"); lista.innerHTML=""; (JSON.parse(localStorage.getItem("resenas"))||[]).reverse().forEach(r=>{ const d=document.createElement("div"); d.className="resena-item"; d.innerHTML=`<strong>${r.n}</strong><p>${r.t}</p>`; lista.appendChild(d); }); } document.addEventListener("DOMContentLoaded",mostrarResenas); </script>
+
+</body> </html>
