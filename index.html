@@ -30,7 +30,7 @@ h2 { color: #ff69b4; margin-bottom: 10px; } p { font-size: 1.1em; margin-bottom:
 
 <button id="btn-music">▶ Escuchar Música Mágica</button>
 
-<!-- AUDIO MP3 LOCAL --> <audio id="musica"> <source src="june-y-lia.mp3" type="audio/mpeg"> </audio>
+<audio id="musica-magica" src="./juneylia.mp3" controls></audio>
 
 <div id="frases-container"></div>
 
@@ -49,5 +49,6 @@ setInterval(()=>{ const f = document.createElement('div'); f.className = 'frase-
 /* BOTÓN MÚSICA */ const btnMusic = document.getElementById('btn-music'); const audio = document.getElementById('musica');
 
 btnMusic.addEventListener('click', () => { if (audio.paused) { audio.play(); btnMusic.textContent = "⏸ Pausar Música"; } else { audio.pause(); btnMusic.textContent = "▶ Escuchar Música Mágica"; } }); </script>
+
 
 </body> </html>
