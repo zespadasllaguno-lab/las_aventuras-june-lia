@@ -50,21 +50,23 @@ setInterval(()=>{ const f = document.createElement('div'); f.className = 'frase-
 /* BOTÓN MÚSICA */ const btnMusic = document.getElementById('btn-music'); const audio = document.getElementById('musica-magica');
 btnMusic.addEventListener('click', () => { if (audio.paused) { audio.play(); btnMusic.textContent = "⏸ Pausar Música"; } else { audio.pause(); btnMusic.textContent = "▶ Escuchar Música Mágica"; } }); </script>
 <script>
-    const boton = document.getElementById("btn-music");
-    const audio = document.getElementById("musica-magica");
+  /* BOTÓN MÚSICA */
+  const btnMusic = document.getElementById("btn-music");
+  const audio = document.getElementById("musica-magica");
 
-    boton.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play();
-        boton.textContent = "⏸️ Pausar Música Mágica";
-      } else {
-        audio.pause();
-        boton.textContent = "🎵 Escuchar Música Mágica";
-      }
-    });
-  </script>
+  btnMusic.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      btnMusic.textContent = "⏸️ Pausar Música Mágica";
+    } else {
+      audio.pause();
+      btnMusic.textContent = "🎵 Escuchar Música Mágica";
+    }
+  });
+</script>  
 
 </body> </html>
+
 
 
 
