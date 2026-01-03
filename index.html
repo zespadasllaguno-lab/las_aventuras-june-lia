@@ -27,9 +27,7 @@ h2 { color: #ff69b4; margin-bottom: 10px; } p { font-size: 1.1em; margin-bottom:
 <header> <h1>Las Aventuras de June y Lía</h1> </header>
 
 <img class="portada" src="portada.jpg" alt="Portada del libro">
-<audio controls>
-  <source src="https://zespadasllaguno-lab.github.io/las_aventuras-june-lia/juneylia.mp3" type="audio/mpeg">
-</audio>
+<audio controls style="position: relative; z-index: 10000;">
 
 <div id="frases-container"></div>
 
@@ -64,6 +62,7 @@ btnMusic.addEventListener('click', () => { if (audio.paused) { audio.play(); btn
 </script>  
 
 </body> </html>
+
 
 
 
